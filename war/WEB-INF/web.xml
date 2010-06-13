@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<servlet>
+		<servlet-name>TwitHubBridge</servlet-name>
+		<servlet-class>net.vvakame.twithubbridge.servlet.TwitHubBridgeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TwitHubBridge</servlet-name>
+		<url-pattern>/twithubbridge</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AccountRegistServlet</servlet-name>
+		<servlet-class>net.vvakame.twithubbridge.servlet.AccountRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AccountRegistServlet</servlet-name>
+		<url-pattern>/regist</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TweetReaderServlet</servlet-name>
+		<servlet-class>net.vvakame.twithubbridge.servlet.TweetReaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TweetReaderServlet</servlet-name>
+		<url-pattern>/tweetreader</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PostGithubServlet</servlet-name>
+		<servlet-class>net.vvakame.twithubbridge.servlet.PostGithubServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostGithubServlet</servlet-name>
+		<url-pattern>/postgithub</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
