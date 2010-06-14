@@ -13,7 +13,7 @@ public class ReadStatusData {
 	private Key key = null;
 
 	private String screenName = null;
-	private String statusId = null;
+	private Long statusId = null;
 	private Date createAt = null;
 
 	public Key getKey() {
@@ -32,11 +32,11 @@ public class ReadStatusData {
 		this.screenName = screenName;
 	}
 
-	public String getStatusId() {
+	public Long getStatusId() {
 		return statusId;
 	}
 
-	public void setStatusId(String statusId) {
+	public void setStatusId(Long statusId) {
 		this.statusId = statusId;
 	}
 

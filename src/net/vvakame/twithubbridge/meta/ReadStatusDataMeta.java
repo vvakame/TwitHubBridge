@@ -1,6 +1,6 @@
 package net.vvakame.twithubbridge.meta;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-13 23:23:39")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-14 12:29:23")
 /** */
 public final class ReadStatusDataMeta extends org.slim3.datastore.ModelMeta<net.vvakame.twithubbridge.model.ReadStatusData> {
 
@@ -14,7 +14,7 @@ public final class ReadStatusDataMeta extends org.slim3.datastore.ModelMeta<net.
     public final org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.ReadStatusData> screenName = new org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.ReadStatusData>(this, "screenName", "screenName");
 
     /** */
-    public final org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.ReadStatusData> statusId = new org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.ReadStatusData>(this, "statusId", "statusId");
+    public final org.slim3.datastore.CoreAttributeMeta<net.vvakame.twithubbridge.model.ReadStatusData, java.lang.Long> statusId = new org.slim3.datastore.CoreAttributeMeta<net.vvakame.twithubbridge.model.ReadStatusData, java.lang.Long>(this, "statusId", "statusId", java.lang.Long.class);
 
     private static final ReadStatusDataMeta slim3_singleton = new ReadStatusDataMeta();
 
@@ -36,7 +36,7 @@ public final class ReadStatusDataMeta extends org.slim3.datastore.ModelMeta<net.
         model.setCreateAt((java.util.Date) entity.getProperty("createAt"));
         model.setKey(entity.getKey());
         model.setScreenName((java.lang.String) entity.getProperty("screenName"));
-        model.setStatusId((java.lang.String) entity.getProperty("statusId"));
+        model.setStatusId((java.lang.Long) entity.getProperty("statusId"));
         return model;
     }
 

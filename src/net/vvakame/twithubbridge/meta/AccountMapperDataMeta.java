@@ -1,6 +1,6 @@
 package net.vvakame.twithubbridge.meta;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-13 23:23:39")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-14 11:30:06")
 /** */
 public final class AccountMapperDataMeta extends org.slim3.datastore.ModelMeta<net.vvakame.twithubbridge.model.AccountMapperData> {
 

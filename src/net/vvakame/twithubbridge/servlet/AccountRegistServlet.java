@@ -1,6 +1,7 @@
 package net.vvakame.twithubbridge.servlet;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -13,9 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.vvakame.twithubbridge.helper.EncryptUtil;
+import net.vvakame.twithubbridge.meta.AccountMapperDataMeta;
 import net.vvakame.twithubbridge.model.AccountMapperData;
 
 import org.slim3.datastore.Datastore;
+
+import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 public class AccountRegistServlet extends HttpServlet {
@@ -53,7 +57,14 @@ public class AccountRegistServlet extends HttpServlet {
 
 			log.info("twitter=" + twitter + ", github=" + github);
 
+			AccountMapperDataMeta aMeta = AccountMapperDataMeta.get();
+			List<Key> keys = Datastore.query(aMeta).filter(
+					aMeta.twitter.equal(twitter), aMeta.github.equal(github))
+					.asKeyList();
+			Datastore.delete(keys);
+
 			AccountMapperData account = new AccountMapperData();
+
 			account.setTwitter(twitter);
 			account.setGithub(github);
 			account.setApiKeyEncrypted(apiKeyEncrypted);

@@ -1,0 +1,15 @@
+<cronentries>
+	<cron>
+		<url>/tweetreader</url>
+		<description>Twitter reader</description>
+		<schedule>every 15 minutes</schedule>
+		<timezone>Asia/Tokyo</timezone>
+	</cron>
+
+	<cron>
+		<url>/postgithub</url>
+		<description>Post github</description>
+		<schedule>every 15 minutes</schedule>
+		<timezone>Asia/Tokyo</timezone>
+	</cron>
+</cronentries>

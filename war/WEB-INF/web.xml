@@ -6,15 +6,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
 	<servlet>
-		<servlet-name>TwitHubBridge</servlet-name>
-		<servlet-class>net.vvakame.twithubbridge.servlet.TwitHubBridgeServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>TwitHubBridge</servlet-name>
-		<url-pattern>/twithubbridge</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>AccountRegistServlet</servlet-name>
 		<servlet-class>net.vvakame.twithubbridge.servlet.AccountRegistServlet</servlet-class>
 	</servlet>
@@ -39,6 +30,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>PostGithubServlet</servlet-name>
 		<url-pattern>/postgithub</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TweetReaderTaskQueueServlet</servlet-name>
+		<servlet-class>net.vvakame.twithubbridge.taskqueue.TweetReaderTaskQueueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TweetReaderTaskQueueServlet</servlet-name>
+		<url-pattern>/workers/tweetreader</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

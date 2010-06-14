@@ -24,6 +24,7 @@ import net.vvakame.twithubbridge.meta.TweetDataMeta;
 import net.vvakame.twithubbridge.model.AccountMapperData;
 import net.vvakame.twithubbridge.model.TweetData;
 
+import org.mortbay.log.Log;
 import org.slim3.datastore.Datastore;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
@@ -81,9 +82,9 @@ public class PostGithubServlet extends HttpServlet {
 				// {"error":"not authorized"}
 
 				if (yaml.containsKey("error")) {
-					throw new IllegalStateException(
-							"Github returns error! message="
-									+ yaml.get("error"));
+					Log.warn("Github returns error! message="
+							+ yaml.get("error"));
+					continue;
 				}
 
 				Datastore.delete(twitData.getKey());
