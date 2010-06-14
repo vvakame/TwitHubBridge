@@ -1,6 +1,6 @@
 package net.vvakame.twithubbridge.meta;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-14 12:29:23")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-14 22:41:39")
 /** */
 public final class ReadStatusDataMeta extends org.slim3.datastore.ModelMeta<net.vvakame.twithubbridge.model.ReadStatusData> {
 

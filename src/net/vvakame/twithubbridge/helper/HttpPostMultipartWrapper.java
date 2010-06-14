@@ -74,11 +74,12 @@ public class HttpPostMultipartWrapper {
 		StringBuilder stb = new StringBuilder();
 		String line = null;
 		while ((line = rd.readLine()) != null) {
+			stb.append("\n");
 			stb.append(line);
 		}
 		rd.close();
 
-		return stb.toString();
+		return stb.length() <= 0 ? "" : stb.toString().substring(1);
 	}
 
 	public InputStream getResponseStream() throws IOException {

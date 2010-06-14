@@ -43,10 +43,24 @@ public class AccountRegistServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		String twitter = req.getParameter("twitter").trim();
-		String github = req.getParameter("github").trim();
-		String apiKey = req.getParameter("apikey").trim();
+		String twitter = req.getParameter("twitter");
+		String github = req.getParameter("github");
+		String apiKey = req.getParameter("apikey");
+		String mode = req.getParameter("mode");
 		if (twitter != null && github != null && apiKey != null) {
+			twitter = twitter.trim();
+			github = github.trim();
+			apiKey = apiKey.trim();
+		} else {
+			twitter = "";
+			github = "";
+			apiKey = "";
+		}
+
+		if (!"".equals(twitter) && !"".equals(github) && !"".equals(apiKey)) {
+
+			String result = "";
+
 			String apiKeyEncrypted = null;
 			try {
 				apiKeyEncrypted = EncryptUtil.encrypt(CRYPT_KEY, apiKey);
@@ -57,18 +71,37 @@ public class AccountRegistServlet extends HttpServlet {
 
 			log.info("twitter=" + twitter + ", github=" + github);
 
-			AccountMapperDataMeta aMeta = AccountMapperDataMeta.get();
-			List<Key> keys = Datastore.query(aMeta).filter(
-					aMeta.twitter.equal(twitter), aMeta.github.equal(github))
-					.asKeyList();
-			Datastore.delete(keys);
+			if ("delete".equals(mode)) {
+				AccountMapperDataMeta aMeta = AccountMapperDataMeta.get();
+				List<Key> keys = Datastore.query(aMeta).filter(
+						aMeta.twitter.equal(twitter),
+						aMeta.github.equal(github),
+						aMeta.apiKeyEncrypted.equal(apiKeyEncrypted))
+						.asKeyList();
+				if (keys.size() != 0) {
+					result = "deleted!<br>";
+					Datastore.delete(keys);
+				}
+			} else {
+				AccountMapperDataMeta aMeta = AccountMapperDataMeta.get();
+				List<Key> keys = Datastore.query(aMeta).filter(
+						aMeta.twitter.equal(twitter),
+						aMeta.github.equal(github)).asKeyList();
+				if (keys.size() != 0) {
+					result = "replaced!<br>";
+					Datastore.delete(keys);
+				}
 
-			AccountMapperData account = new AccountMapperData();
+				AccountMapperData account = new AccountMapperData();
 
-			account.setTwitter(twitter);
-			account.setGithub(github);
-			account.setApiKeyEncrypted(apiKeyEncrypted);
-			Datastore.put(account);
+				account.setTwitter(twitter);
+				account.setGithub(github);
+				account.setApiKeyEncrypted(apiKeyEncrypted);
+				Datastore.put(account);
+			}
+
+			result += "success!!<br>";
+			req.setAttribute("result", result);
 		}
 
 		ServletContext sc = getServletContext();

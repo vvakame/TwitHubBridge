@@ -6,12 +6,14 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +24,18 @@ import net.vvakame.twithubbridge.helper.HttpPostMultipartWrapper;
 import net.vvakame.twithubbridge.meta.AccountMapperDataMeta;
 import net.vvakame.twithubbridge.meta.TweetDataMeta;
 import net.vvakame.twithubbridge.model.AccountMapperData;
+import net.vvakame.twithubbridge.model.BadData;
 import net.vvakame.twithubbridge.model.TweetData;
 
-import org.mortbay.log.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slim3.datastore.Datastore;
-
-import com.esotericsoftware.yamlbeans.YamlReader;
 
 @SuppressWarnings("serial")
 public class PostGithubServlet extends HttpServlet {
+
+	private static final Logger log = Logger.getLogger(PostGithubServlet.class
+			.getName());
 
 	private static final String PROP = "twithubbridge";
 	private static String CRYPT_KEY = "default";
@@ -73,18 +78,23 @@ public class PostGithubServlet extends HttpServlet {
 
 				String response = post.readResponse();
 
-				@SuppressWarnings("unchecked")
-				Map<String, Object> yaml = (Map<String, Object>) new YamlReader(
-						response).read();
+				JSONObject json = null;
+				try {
+					json = new JSONObject(response);
+				} catch (JSONException e) {
+					// 握りつぶす
+				}
 
-				// 失敗例
-				// Token違う
-				// {"error":"not authorized"}
-
-				if (yaml.containsKey("error")) {
-					Log.warn("Github returns error! message="
-							+ yaml.get("error"));
-					continue;
+				if (json == null || json.has("error")) {
+					log.warning("catch up error!");
+					BadData bad = new BadData();
+					bad.setTwitter(account.getTwitter());
+					bad.setGithub(account.getGithub());
+					bad.setApiKeyEncrypted(account.getApiKeyEncrypted());
+					bad.setStatusId(twitData.getStatusId());
+					bad.setError(json != null && json.has("error") ? json
+							.getString("error") : "unknown");
+					Datastore.put(bad);
 				}
 
 				Datastore.delete(twitData.getKey());
@@ -103,7 +113,13 @@ public class PostGithubServlet extends HttpServlet {
 				throw new ServletException(e);
 			} catch (NoSuchPaddingException e) {
 				throw new ServletException(e);
+			} catch (JSONException e) {
+				throw new ServletException(e);
 			}
 		}
+		
+		ServletContext sc = getServletContext();
+		RequestDispatcher rd = sc.getRequestDispatcher("/WEB-INF/done.jsp");
+		rd.forward(req, res);
 	}
 }

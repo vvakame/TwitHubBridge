@@ -119,6 +119,7 @@ public class TweetReaderTaskQueueServlet extends HttpServlet {
 					TweetData twiData = new TweetData();
 					twiData.setScreenName(status.getUser().getScreenName());
 					twiData.setTweet(txt);
+					twiData.setStatusId(status.getId());
 					twiData.setDate(status.getCreatedAt());
 					twiData.setProject(project);
 					twiData.setTitle(title);

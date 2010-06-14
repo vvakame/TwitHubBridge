@@ -1,6 +1,6 @@
 package net.vvakame.twithubbridge.meta;
 
-//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-14 11:30:06")
+//@javax.annotation.Generated(value = { "slim3-gen", "@VERSION@" }, date = "2010-06-14 22:41:39")
 /** */
 public final class TweetDataMeta extends org.slim3.datastore.ModelMeta<net.vvakame.twithubbridge.model.TweetData> {
 
@@ -18,6 +18,9 @@ public final class TweetDataMeta extends org.slim3.datastore.ModelMeta<net.vvaka
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.TweetData> screenName = new org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.TweetData>(this, "screenName", "screenName");
+
+    /** */
+    public final org.slim3.datastore.CoreAttributeMeta<net.vvakame.twithubbridge.model.TweetData, java.lang.Long> statusId = new org.slim3.datastore.CoreAttributeMeta<net.vvakame.twithubbridge.model.TweetData, java.lang.Long>(this, "statusId", "statusId", java.lang.Long.class);
 
     /** */
     public final org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.TweetData> title = new org.slim3.datastore.StringAttributeMeta<net.vvakame.twithubbridge.model.TweetData>(this, "title", "title");
@@ -47,6 +50,7 @@ public final class TweetDataMeta extends org.slim3.datastore.ModelMeta<net.vvaka
         model.setKey(entity.getKey());
         model.setProject((java.lang.String) entity.getProperty("project"));
         model.setScreenName((java.lang.String) entity.getProperty("screenName"));
+        model.setStatusId((java.lang.Long) entity.getProperty("statusId"));
         model.setTitle((java.lang.String) entity.getProperty("title"));
         model.setTweet((java.lang.String) entity.getProperty("tweet"));
         return model;
@@ -65,6 +69,7 @@ public final class TweetDataMeta extends org.slim3.datastore.ModelMeta<net.vvaka
         entity.setProperty("date", m.getDate());
         entity.setProperty("project", m.getProject());
         entity.setProperty("screenName", m.getScreenName());
+        entity.setProperty("statusId", m.getStatusId());
         entity.setProperty("title", m.getTitle());
         entity.setProperty("tweet", m.getTweet());
         return entity;

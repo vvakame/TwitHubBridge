@@ -13,6 +13,7 @@ public class TweetData {
 	private Key key = null;
 
 	private String screenName = null;
+	private Long statusId = null;
 	private String tweet = null;
 	private Date date = null;
 
@@ -34,6 +35,14 @@ public class TweetData {
 
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
+	}
+
+	public Long getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(Long statusId) {
+		this.statusId = statusId;
 	}
 
 	public String getTweet() {
